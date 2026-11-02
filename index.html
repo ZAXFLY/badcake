@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>BADCAKE — good people, bad ideas</title>
+  <meta name="description" content="BADCAKE · Catálogo oficial de camisas. Good people, bad ideas.">
+  <meta name="theme-color" content="#0a0a0a">
+  <meta property="og:title" content="BADCAKE — good people, bad ideas">
+  <meta property="og:description" content="Catálogo oficial de camisas BADCAKE.">
+  <meta property="og:image" content="assets/img/lockup-negro.png">
+  <link rel="icon" type="image/png" href="assets/img/logo-negro.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amita:wght@400;700&family=Archivo+Black&family=Archivo:wght@400;500;600;700&family=Rubik:wght@800;900&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/tienda.css">
+</head>
+<body class="cargando">
+
+  <div class="grano" aria-hidden="true"></div>
+
+  <!-- Cursor personalizado -->
+  <div class="cursor" id="cursor" aria-hidden="true">
+    <span class="cursor__punto"></span>
+    <span class="cursor__aro"><span class="cursor__texto" id="cursorTexto">VER</span></span>
+  </div>
+
+  <!-- ============ LOADER ============ -->
+  <div class="loader" id="loader" aria-hidden="true">
+    <div class="loader__centro">
+      <img class="loader__logo" src="assets/img/logo-blanco.png" alt="">
+    </div>
+    <div class="loader__pie">
+      <span>Horneando malas ideas</span>
+      <span class="loader__num" id="loaderNum">000</span>
+    </div>
+    <div class="loader__barra"><span id="loaderBarra"></span></div>
+  </div>
+
+  <!-- ============ NAVEGACIÓN ============ -->
+  <header class="nav" id="nav">
+    <a href="#inicio" class="nav__logo" aria-label="BADCAKE, inicio">
+      <img src="assets/img/titulo-blanco.png" alt="BADCAKE">
+    </a>
+    <nav class="nav__links" aria-label="Principal">
+      <a href="#catalogo"><span>Catálogo</span></a>
+      <a href="#manifiesto"><span>Manifiesto</span></a>
+      <a href="#contacto"><span>Contacto</span></a>
+    </nav>
+    <button class="nav__bolsa" id="btnBolsa" aria-label="Abrir bolsa">
+      <span>Bolsa</span><span class="nav__conteo" id="bolsaConteo">0</span>
+    </button>
+  </header>
+
+  <main>
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="inicio">
+      <div class="hero__negro" aria-hidden="true"></div>
+
+      <div class="hero__mezcla">
+        <div class="hero__meta hero__meta--tl entrar">
+          <span>N° 001</span><span>Catálogo oficial</span>
+        </div>
+        <div class="hero__meta hero__meta--tr entrar">
+          <span>Solo camisas</span><span>Edición <b id="anio">2026</b></span>
+        </div>
+
+        <div class="hero__centro entrar">
+          <svg class="hero__anillo" viewBox="0 0 500 500" aria-hidden="true">
+            <defs>
+              <path id="circulo" d="M250,250 m-218,0 a218,218 0 1,1 436,0 a218,218 0 1,1 -436,0"/>
+            </defs>
+            <text>
+              <textPath href="#circulo" textLength="1365" lengthAdjust="spacing">GOOD PEOPLE ✦ BAD IDEAS ✦ GOOD PEOPLE ✦ BAD IDEAS ✦</textPath>
+            </text>
+          </svg>
+          <div class="hero__logo-envoltura">
+            <img class="hero__logo" id="heroLogo" src="assets/img/logo-blanco.png" alt="BADCAKE">
+          </div>
+        </div>
+
+        <img class="hero__eslogan entrar" src="assets/img/eslogan-blanco.png" alt="good people, bad ideas">
+
+        <div class="hero__meta hero__meta--bl entrar">
+          <span>Blanco.</span><span>Negro.</span><span>Malas ideas.</span>
+        </div>
+        <a class="hero__meta hero__meta--br hero__bajar entrar" href="#catalogo">
+          <span>Ver catálogo</span><span class="hero__flecha">↓</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- ============ CINTAS ============ -->
+    <section class="cintas" aria-hidden="true">
+      <div class="cinta cinta--negra"><div class="cinta__pista" data-dir="-1"></div></div>
+      <div class="cinta cinta--blanca"><div class="cinta__pista" data-dir="1"></div></div>
+    </section>
+
+    <!-- ============ DESTACADAS ============ -->
+    <section class="destacadas" id="destacadas" hidden>
+      <div class="seccion-cabeza">
+        <span class="etiqueta">(Destacadas)</span>
+        <h2 class="titulo-grande">Lo más <em class="script">malo</em></h2>
+        <p class="seccion-cabeza__nota">Arrastra →</p>
+      </div>
+      <div class="carril" id="carril"></div>
+    </section>
+
+    <!-- ============ CATÁLOGO ============ -->
+    <section class="catalogo" id="catalogo">
+      <div class="catalogo__cabeza">
+        <h2 class="catalogo__titulo">
+          <span class="revelar-linea"><span>Catá</span></span><span class="revelar-linea"><span>logo<sup id="conteo">(0)</sup></span></span>
+        </h2>
+        <p class="catalogo__bajada script">camisas para gente buena con ideas malas</p>
+      </div>
+
+      <div class="filtros" id="filtros">
+        <div class="filtros__chips" id="chipsColeccion" role="tablist" aria-label="Colecciones"></div>
+        <div class="filtros__derecha">
+          <div class="filtros__tallas" id="chipsTalla" aria-label="Filtrar por talla"></div>
+          <label class="filtros__buscar">
+            <span class="sr">Buscar</span>
+            <input type="search" id="buscar" placeholder="Buscar camisa…" autocomplete="off">
+          </label>
+          <label class="filtros__orden">
+            <span class="sr">Ordenar</span>
+            <select id="ordenar">
+              <option value="nuevas">Más nuevas</option>
+              <option value="precio-asc">Precio: menor a mayor</option>
+              <option value="precio-desc">Precio: mayor a menor</option>
+              <option value="nombre">Nombre A–Z</option>
+            </select>
+          </label>
+        </div>
+      </div>
+
+      <div class="rejilla" id="rejilla" aria-live="polite"></div>
+
+      <div class="vacio" id="vacio" hidden>
+        <img src="assets/img/logo-negro.png" alt="" class="vacio__logo">
+        <p class="vacio__titulo" id="vacioTitulo">Algo malo se está horneando…</p>
+        <p class="vacio__texto" id="vacioTexto">Muy pronto nuevas camisas por aquí.</p>
+      </div>
+    </section>
+
+    <!-- ============ MANIFIESTO ============ -->
+    <section class="manifiesto" id="manifiesto">
+      <div class="manifiesto__cabeza">
+        <span class="etiqueta">(Manifiesto)</span>
+        <span class="etiqueta">BADCAKE® — <span id="anio2">2026</span></span>
+      </div>
+      <p class="manifiesto__frase" id="manifiestoFrase"></p>
+      <div class="manifiesto__pie">
+        <img src="assets/img/lockup-blanco.png" alt="BADCAKE good people, bad ideas" class="manifiesto__lockup">
+        <div class="manifiesto__lista">
+          <span>01 — Solo camisas</span>
+          <span>02 — Solo blanco y negro</span>
+          <span>03 — Solo malas ideas</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ PIE / CONTACTO ============ -->
+  <footer class="pie" id="contacto">
+    <div class="pie__arriba">
+      <p class="pie__frase script">¿Tienes una mala idea?<br>Escríbenos.</p>
+      <div class="pie__grid">
+        <div class="pie__col">
+          <span class="etiqueta">Pedidos</span>
+          <a href="#" id="lnkWhats" target="_blank" rel="noopener">WhatsApp ↗</a>
+        </div>
+        <div class="pie__col">
+          <span class="etiqueta">Síguenos</span>
+          <a href="#" id="lnkInsta" target="_blank" rel="noopener">Instagram ↗</a>
+          <a href="#" id="lnkTiktok" target="_blank" rel="noopener">TikTok ↗</a>
+        </div>
+        <div class="pie__col">
+          <span class="etiqueta">Correo</span>
+          <a href="#" id="lnkMail">—</a>
+        </div>
+        <div class="pie__col">
+          <span class="etiqueta">Navegar</span>
+          <a href="#catalogo">Catálogo</a>
+          <a href="#manifiesto">Manifiesto</a>
+          <a href="admin.html">Panel dueño ↗</a>
+          <a href="#inicio">Volver arriba ↑</a>
+        </div>
+      </div>
+    </div>
+    <img class="pie__titulo" src="assets/img/titulo-negro.png" alt="BADCAKE">
+    <div class="pie__base">
+      <span>© <span id="anio3">2026</span> BADCAKE</span>
+      <span class="script pie__eslogan">good people, bad ideas</span>
+      <span>Todos los derechos reservados</span>
+    </div>
+  </footer>
+
+  <!-- ============ MODAL DE CAMISA ============ -->
+  <div class="modal" id="modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="mNombre">
+    <div class="modal__fondo" data-cerrar></div>
+    <article class="modal__caja">
+      <button class="modal__cerrar" data-cerrar aria-label="Cerrar">Cerrar <span>✕</span></button>
+      <div class="modal__galeria">
+        <div class="modal__principal" id="mPrincipal"></div>
+        <button class="modal__flecha modal__flecha--izq" id="mPrev" aria-label="Foto anterior">←</button>
+        <button class="modal__flecha modal__flecha--der" id="mSig" aria-label="Foto siguiente">→</button>
+        <div class="modal__minis" id="mMinis"></div>
+      </div>
+      <div class="modal__info">
+        <div class="modal__top">
+          <span class="etiqueta" id="mNum">N° 000</span>
+          <span class="etiqueta" id="mColeccion"></span>
+        </div>
+        <h3 class="modal__nombre" id="mNombre"></h3>
+        <div class="modal__precio" id="mPrecio"></div>
+        <p class="modal__desc" id="mDesc"></p>
+        <p class="modal__color" id="mColor"></p>
+        <div class="modal__tallas">
+          <div class="modal__tallas-cabeza"><span class="etiqueta">Talla</span><span class="modal__aviso" id="mAviso"></span></div>
+          <div class="modal__tallas-lista" id="mTallas"></div>
+        </div>
+        <div class="modal__acciones">
+          <button class="btn btn--negro btn--bloque" id="mAgregar">Agregar a la bolsa</button>
+          <button class="btn btn--borde btn--bloque" id="mWhats">Pedir por WhatsApp</button>
+        </div>
+        <button class="modal__compartir" id="mCompartir">Copiar enlace de esta camisa</button>
+      </div>
+    </article>
+  </div>
+
+  <!-- ============ BOLSA ============ -->
+  <aside class="bolsa" id="bolsa" aria-hidden="true">
+    <div class="bolsa__fondo" data-cerrar-bolsa></div>
+    <div class="bolsa__panel" role="dialog" aria-label="Tu bolsa">
+      <header class="bolsa__cabeza">
+        <h3>Tu bolsa <sup id="bolsaConteo2">0</sup></h3>
+        <button data-cerrar-bolsa aria-label="Cerrar bolsa">✕</button>
+      </header>
+      <div class="bolsa__items" id="bolsaItems"></div>
+      <footer class="bolsa__pie">
+        <div class="bolsa__total"><span>Total estimado</span><strong id="bolsaTotal">—</strong></div>
+        <button class="btn btn--blanco btn--bloque" id="bolsaEnviar">Enviar pedido por WhatsApp</button>
+        <p class="bolsa__nota">Te respondemos para confirmar disponibilidad, pago y envío.</p>
+      </footer>
+    </div>
+  </aside>
+
+  <div class="toasts" id="toasts"></div>
+
+  <script src="js/config.js"></script>
+  <script src="js/ejemplos.js"></script>
+  <script src="js/db.js"></script>
+  <script src="js/tienda.js"></script>
+</body>
+</html>

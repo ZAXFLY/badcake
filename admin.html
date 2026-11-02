@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Panel · BADCAKE</title>
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#0a0a0a">
+  <link rel="icon" type="image/png" href="assets/img/logo-negro.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amita:wght@400;700&family=Archivo+Black&family=Archivo:wght@400;500;600;700&family=Rubik:wght@800;900&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body class="admin">
+
+  <div class="grano" aria-hidden="true"></div>
+
+  <!-- ============ LOGIN ============ -->
+  <section class="login" id="login" hidden>
+    <div class="login__arte">
+      <div class="login__marquesina" aria-hidden="true"><span>PANEL DEL DUEÑO ✦ BADCAKE ✦ PANEL DEL DUEÑO ✦ BADCAKE ✦ </span><span>PANEL DEL DUEÑO ✦ BADCAKE ✦ PANEL DEL DUEÑO ✦ BADCAKE ✦ </span></div>
+      <img src="assets/img/logo-blanco.png" alt="BADCAKE" class="login__logo">
+      <img src="assets/img/eslogan-blanco.png" alt="good people, bad ideas" class="login__eslogan">
+    </div>
+    <form class="login__form" id="formLogin" autocomplete="on">
+      <span class="etiqueta">Acceso privado</span>
+      <h1 class="login__titulo">Hola,<br><em class="script">jefe.</em></h1>
+      <p class="login__modo" id="loginModo"></p>
+      <label class="campo" id="campoEmail" hidden>
+        <span class="campo__etiqueta">Correo</span>
+        <input type="email" id="loginEmail" autocomplete="username" placeholder="tu@correo.com">
+      </label>
+      <label class="campo">
+        <span class="campo__etiqueta">Contraseña</span>
+        <input type="password" id="loginClave" autocomplete="current-password" required placeholder="••••••••">
+      </label>
+      <button class="btn btn--negro btn--bloque" type="submit" id="btnEntrar">Entrar al panel →</button>
+      <p class="login__error" id="loginError" role="alert"></p>
+      <a href="index.html" class="login__volver">← Volver a la tienda</a>
+    </form>
+  </section>
+
+  <!-- ============ APP ============ -->
+  <div class="app" id="app" hidden>
+    <aside class="lateral">
+      <a href="index.html" target="_blank" class="lateral__logo" title="Ver tienda">
+        <img src="assets/img/titulo-blanco.png" alt="BADCAKE">
+      </a>
+      <span class="lateral__modo" id="modoBadge">Modo local</span>
+      <nav class="lateral__nav">
+        <button class="lateral__link activo" data-vista="camisas"><span class="lateral__num">01</span>Camisas <sup id="navConteo">0</sup></button>
+        <button class="lateral__link" data-vista="ajustes"><span class="lateral__num">02</span>Ajustes</button>
+        <button class="lateral__link" data-vista="datos"><span class="lateral__num">03</span>Datos</button>
+      </nav>
+      <div class="lateral__pie">
+        <img src="assets/img/logo-blanco.png" alt="" class="lateral__globo">
+        <a href="index.html" target="_blank" class="lateral__accion">Ver tienda ↗</a>
+        <button class="lateral__accion" id="btnSalir">Cerrar sesión</button>
+      </div>
+    </aside>
+
+    <main class="principal">
+
+      <!-- ===== VISTA: CAMISAS ===== -->
+      <section class="vista activa" id="vista-camisas">
+        <header class="vista__cabeza">
+          <div>
+            <span class="etiqueta">Inventario</span>
+            <h1 class="vista__titulo">Camisas</h1>
+          </div>
+          <button class="btn btn--negro" id="btnNueva">+ Nueva camisa</button>
+        </header>
+
+        <div class="stats">
+          <div class="stat"><span class="stat__num" id="stTotal">0</span><span class="stat__txt">En total</span></div>
+          <div class="stat"><span class="stat__num" id="stVisibles">0</span><span class="stat__txt">Visibles</span></div>
+          <div class="stat"><span class="stat__num" id="stDestacadas">0</span><span class="stat__txt">Destacadas</span></div>
+          <div class="stat stat--negro"><span class="stat__num" id="stAgotadas">0</span><span class="stat__txt">Agotadas</span></div>
+        </div>
+
+        <div class="barra">
+          <label class="barra__buscar">
+            <span class="sr">Buscar</span>
+            <input type="search" id="adBuscar" placeholder="Buscar por nombre o colección…">
+          </label>
+          <div class="segmentado" id="adFiltro">
+            <button class="activo" data-f="todas">Todas</button>
+            <button data-f="visibles">Visibles</button>
+            <button data-f="ocultas">Ocultas</button>
+            <button data-f="destacadas">Destacadas</button>
+            <button data-f="agotadas">Agotadas</button>
+          </div>
+        </div>
+
+        <div class="lista" id="lista"></div>
+
+        <div class="vacio-admin" id="vacioAdmin" hidden>
+          <img src="assets/img/logo-negro.png" alt="">
+          <h2>Todavía no hay camisas</h2>
+          <p class="script">toda mala idea empieza por algún lado…</p>
+          <div class="vacio-admin__acciones">
+            <button class="btn btn--negro" data-accion="nueva">+ Agregar la primera</button>
+            <button class="btn btn--borde" data-accion="ejemplos">Cargar camisas de ejemplo</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== VISTA: AJUSTES ===== -->
+      <section class="vista" id="vista-ajustes">
+        <header class="vista__cabeza">
+          <div>
+            <span class="etiqueta">Configuración</span>
+            <h1 class="vista__titulo">Ajustes</h1>
+          </div>
+        </header>
+        <form class="ajustes" id="formAjustes">
+          <fieldset class="grupo">
+            <legend>Contacto y pedidos</legend>
+            <label class="campo">
+              <span class="campo__etiqueta">WhatsApp (con código de país)</span>
+              <input type="tel" name="whatsapp" placeholder="Ej: 18095551234">
+              <small>Aquí llegan los pedidos de los clientes. Solo números, con el código de país (RD: 1809, 1829 o 1849).</small>
+            </label>
+            <label class="campo">
+              <span class="campo__etiqueta">Correo</span>
+              <input type="email" name="email" placeholder="hola@badcake.com">
+            </label>
+          </fieldset>
+          <fieldset class="grupo">
+            <legend>Redes sociales</legend>
+            <label class="campo">
+              <span class="campo__etiqueta">Instagram</span>
+              <input type="text" name="instagram" placeholder="@badcake">
+            </label>
+            <label class="campo">
+              <span class="campo__etiqueta">TikTok</span>
+              <input type="text" name="tiktok" placeholder="@badcake">
+            </label>
+          </fieldset>
+          <fieldset class="grupo">
+            <legend>Tienda</legend>
+            <label class="campo campo--corto">
+              <span class="campo__etiqueta">Moneda</span>
+              <input type="text" name="moneda" placeholder="RD$" maxlength="6">
+            </label>
+            <label class="campo">
+              <span class="campo__etiqueta">Anuncio en la cinta</span>
+              <input type="text" name="anuncio" placeholder="Envíos a todo el país" maxlength="60">
+              <small>Aparece en la cinta negra que se mueve debajo del inicio.</small>
+            </label>
+            <label class="campo">
+              <span class="campo__etiqueta">Texto del manifiesto</span>
+              <textarea name="manifiesto" rows="4" maxlength="400"></textarea>
+            </label>
+            <label class="interruptor">
+              <input type="checkbox" name="fotosBN">
+              <span class="interruptor__pista"></span>
+              <span>Mostrar fotos en blanco y negro (a color al pasar el mouse)</span>
+            </label>
+          </fieldset>
+          <div class="ajustes__acciones">
+            <button class="btn btn--negro" type="submit">Guardar ajustes</button>
+          </div>
+        </form>
+      </section>
+
+      <!-- ===== VISTA: DATOS ===== -->
+      <section class="vista" id="vista-datos">
+        <header class="vista__cabeza">
+          <div>
+            <span class="etiqueta">Base de datos</span>
+            <h1 class="vista__titulo">Datos</h1>
+          </div>
+        </header>
+
+        <div class="tarjetas-datos">
+          <article class="dato dato--negro">
+            <span class="etiqueta" id="datoModoEtiqueta">Estado</span>
+            <h3 id="datoModoTitulo">Modo local</h3>
+            <p id="datoModoTexto"></p>
+          </article>
+          <article class="dato">
+            <span class="etiqueta">Respaldo</span>
+            <h3>Descargar copia</h3>
+            <p>Guarda un archivo con todas tus camisas, fotos y ajustes. Hazlo de vez en cuando.</p>
+            <button class="btn btn--negro" id="btnExportar">Descargar respaldo</button>
+          </article>
+          <article class="dato">
+            <span class="etiqueta">Restaurar</span>
+            <h3>Subir copia</h3>
+            <p>Carga un respaldo descargado antes. Las camisas se agregan o actualizan.</p>
+            <label class="btn btn--borde">Elegir archivo…<input type="file" id="inImportar" accept="application/json,.json" hidden></label>
+          </article>
+          <article class="dato">
+            <span class="etiqueta">Demostración</span>
+            <h3>Camisas de ejemplo</h3>
+            <p>Agrega 8 camisas de prueba para ver cómo luce la tienda. Luego puedes borrarlas.</p>
+            <button class="btn btn--borde" id="btnEjemplos">Cargar ejemplos</button>
+          </article>
+          <article class="dato">
+            <span class="etiqueta">Zona peligrosa</span>
+            <h3>Borrar todo</h3>
+            <p>Elimina todas las camisas del catálogo. Esta acción no se puede deshacer.</p>
+            <button class="btn btn--peligro" id="btnBorrarTodo">Borrar todas las camisas</button>
+          </article>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- ============ EDITOR DE CAMISA ============ -->
+  <div class="editor" id="editor" aria-hidden="true">
+    <div class="editor__fondo" data-cerrar-editor></div>
+    <form class="editor__panel" id="formCamisa" novalidate>
+      <header class="editor__cabeza">
+        <div>
+          <span class="etiqueta" id="edEtiqueta">Nueva</span>
+          <h2 id="edTitulo">Nueva camisa</h2>
+        </div>
+        <button type="button" class="editor__cerrar" data-cerrar-editor aria-label="Cerrar">✕</button>
+      </header>
+
+      <div class="editor__cuerpo">
+        <div class="editor__seccion">
+          <div class="editor__subtitulo"><span>01</span> Fotos <small>La primera es la portada. Arrastra para ordenar.</small></div>
+          <label class="subida" id="zonaSubida">
+            <input type="file" id="inFotos" accept="image/*" multiple hidden>
+            <span class="subida__icono">+</span>
+            <span class="subida__texto"><b>Suelta las fotos aquí</b> o haz clic para elegirlas</span>
+            <span class="subida__nota">JPG, PNG o WEBP · se optimizan automáticamente</span>
+          </label>
+          <div class="fotos" id="fotos"></div>
+        </div>
+
+        <div class="editor__seccion">
+          <div class="editor__subtitulo"><span>02</span> Información</div>
+          <label class="campo">
+            <span class="campo__etiqueta">Nombre de la camisa *</span>
+            <input type="text" name="nombre" maxlength="60" placeholder="Ej: Bad Idea Tee" required>
+          </label>
+          <div class="fila">
+            <label class="campo">
+              <span class="campo__etiqueta">Precio *</span>
+              <input type="number" name="precio" min="0" step="1" placeholder="1500" required>
+            </label>
+            <label class="campo">
+              <span class="campo__etiqueta">Precio anterior (oferta)</span>
+              <input type="number" name="precio_anterior" min="0" step="1" placeholder="Opcional">
+            </label>
+          </div>
+          <div class="fila">
+            <label class="campo">
+              <span class="campo__etiqueta">Colección</span>
+              <input type="text" name="coleccion" list="listaColecciones" maxlength="40" placeholder="Ej: Drop 01">
+              <datalist id="listaColecciones"></datalist>
+            </label>
+            <label class="campo">
+              <span class="campo__etiqueta">Color</span>
+              <input type="text" name="color" maxlength="40" placeholder="Ej: Negro">
+            </label>
+          </div>
+          <label class="campo">
+            <span class="campo__etiqueta">Descripción</span>
+            <textarea name="descripcion" rows="4" maxlength="600" placeholder="Tela, corte, detalles del estampado…"></textarea>
+          </label>
+        </div>
+
+        <div class="editor__seccion">
+          <div class="editor__subtitulo"><span>03</span> Tallas disponibles</div>
+          <div class="tallas-sel" id="tallasSel"></div>
+        </div>
+
+        <div class="editor__seccion">
+          <div class="editor__subtitulo"><span>04</span> Estado</div>
+          <label class="interruptor">
+            <input type="checkbox" name="visible" checked>
+            <span class="interruptor__pista"></span>
+            <span><b>Visible</b> en la tienda</span>
+          </label>
+          <label class="interruptor">
+            <input type="checkbox" name="destacado">
+            <span class="interruptor__pista"></span>
+            <span><b>Destacada</b> (aparece en “Lo más malo”)</span>
+          </label>
+          <label class="interruptor">
+            <input type="checkbox" name="agotado">
+            <span class="interruptor__pista"></span>
+            <span><b>Agotada</b> (se muestra pero no se puede pedir)</span>
+          </label>
+        </div>
+      </div>
+
+      <footer class="editor__pie">
+        <button type="button" class="btn btn--borde" data-cerrar-editor>Cancelar</button>
+        <button type="submit" class="btn btn--negro" id="btnGuardar">Guardar camisa</button>
+      </footer>
+    </form>
+  </div>
+
+  <!-- ============ DIÁLOGO DE CONFIRMACIÓN ============ -->
+  <div class="dialogo" id="dialogo" aria-hidden="true" role="alertdialog" aria-labelledby="dlgTitulo">
+    <div class="dialogo__caja">
+      <h3 id="dlgTitulo">¿Seguro?</h3>
+      <p id="dlgTexto"></p>
+      <div class="dialogo__acciones">
+        <button class="btn btn--borde" id="dlgNo">Cancelar</button>
+        <button class="btn btn--negro" id="dlgSi">Sí, continuar</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toasts" id="toasts"></div>
+
+  <script src="js/config.js"></script>
+  <script src="js/ejemplos.js"></script>
+  <script src="js/db.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>
